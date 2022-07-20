@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 步骤2：准备一个呈现图表的盒子 -->
+  <div class="box" style="width: 600px;height: 500px;margin: 100px auto;"></div>
+
+  <!-- IMPORT JS -->
+  <!-- 步骤1：引入echarts.js文件 -->
+  <script src="./lib/echarts.min.js"></script>
+  <script>
+    let pieData = [{
+      name: 't1',
+      value: '3000'
+    }, {
+      name: 't2',
+      value: '3500'
+    }, {
+      name: 't3',
+      value: '3200'
+    }, {
+      name: 't4',
+      value: '1000'
+    }, {
+      name: 't5',
+      value: '2000'
+    }, {
+      name: 't6',
+      value: '100'
+    }, ]
+
+    let myChart = echarts.init(document.querySelector('.box'))
+    let option = {
+      series: [{
+        data: pieData,
+        type: 'pie',
+        label: {
+          show: true, // 显示文字
+          formatter: function (arg) {
+            return arg.name + ' ' + arg.percent + '%'
+          }
+        },
+        // radius:['50%','75%']
+        roseType: 'radius',
+        selectedMode: 'multiple',
+        selectedOffset: 30
+      }]
+    }
+    myChart.setOption(option)
+  </script>
+</body>
+
+</html>
