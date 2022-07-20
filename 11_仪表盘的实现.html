@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 步骤2：准备一个呈现图表的盒子 -->
+  <div class="box" style="width: 600px;height: 500px;margin: 100px auto;"></div>
+
+  <!-- IMPORT JS -->
+  <!-- 步骤1：引入echarts.js文件 -->
+  <script src="./lib/echarts.min.js"></script>
+  <script src="./lib/jquery.min.js"></script>
+  <script>
+    let myCharts = echarts.init(document.querySelector('.box'))
+    let option = {
+      series: [{
+        type: 'gauge',
+        data: [{
+          value: 97
+        },{
+          value:92,
+          itemStyle:{
+            color:'red'
+          }
+        }],
+        min: 90
+      }]
+    }
+    myCharts.setOption(option)
+  </script>
+</body>
+
+</html>

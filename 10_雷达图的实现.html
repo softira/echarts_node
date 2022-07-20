@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 步骤2：准备一个呈现图表的盒子 -->
+  <div class="box" style="width: 600px;height: 500px;margin: 100px auto;"></div>
+
+  <!-- IMPORT JS -->
+  <!-- 步骤1：引入echarts.js文件 -->
+  <script src="./lib/echarts.min.js"></script>
+  <script src="./lib/jquery.min.js"></script>
+  <script>
+    let myCharts = echarts.init(document.querySelector('.box'))
+    let dataMax = [
+      {name:'Math',max:100},
+      {name:'Natural',max:100},
+      {name:'Sci',max:100},
+      {name:'Lang',max:100},
+      {name:'En',max:100}
+    ]
+    let option = {
+      radar:{
+        indicator:dataMax,
+        shape:'circle'
+      },
+      series:[
+        {
+          type:'radar',
+          data:[
+            {
+              name:'ts',
+              value:[90,90,80,50,70]
+            }
+          ],
+          areaStyle:{}
+        }
+      ]
+    }
+    myCharts.setOption(option)
+  </script>
+</body>
+
+</html>
