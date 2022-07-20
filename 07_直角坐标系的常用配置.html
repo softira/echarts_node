@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 步骤2：准备一个呈现图表的盒子 -->
+  <div class="box" style="width: 600px;height: 500px;margin: 100px auto;"></div>
+
+  <!-- IMPORT JS -->
+  <!-- 步骤1：引入echarts.js文件 -->
+  <script src="./lib/echarts.min.js"></script>
+  <script>
+    let xData = ['t1', 't2', 't3', 't4', 't5', 't6']
+    let yData = [21, 34, 51, 64, 46, 23]
+
+    // 步骤3：初始化echarts实例对象
+    let myChart = echarts.init(document.querySelector('.box'))
+    // 步骤4：准备配置项
+    let option = {
+      dataZoom:[
+        {
+          type:'slider',
+          // type:'inside'
+          xAxisIndex:0
+        },{
+          type:'slider',
+          yAxisIndex:0
+        }
+      ],
+      grid: {
+        show: true,
+        borderWidth: 10,
+        width:300,
+        height:150
+      },
+      xAxis: {
+        type: 'category',
+        data: xData,
+        position:'top'
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [{
+        name: 'score',
+        type: 'bar',
+        data: yData,
+      }]
+    }
+    // 步骤5：将配置项设置给echarts实例对象
+    myChart.setOption(option)
+  </script>
+</body>
+
+</html>
