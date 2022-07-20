@@ -18,16 +18,44 @@
   <script>
     let xData = ['t1', 't2', 't3', 't4', 't5', 't6']
     let yData = [21, 34, 51, 64, 46, 23]
+    let yData2 = [50, 55, 6, 88, 61, 25]
 
     // 步骤3：初始化echarts实例对象
     let myChart = echarts.init(document.querySelector('.box'))
     // 步骤4：准备配置项
     let option = {
       title: {
+        text: 'title',
         textStyle: {
-          text: 'title'
           color: 'red'
+        },
+        borderWidth: 5,
+        borderColor: 'blue',
+        borderRadius: 5,
+        left: 500
+      },
+      tooltip: {
+        // trigger: 'item'
+        trigger: 'axis',
+        triggerOn: 'click',
+        // formatter:`{a} + {b} + {c}`
+        formatter: function (arg) {
+          console.log(arg);
         }
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {}, // 导出图片
+          dataView: {}, // 数据视图
+          restore: {}, // 重置
+          dataZoom: {}, // 区域缩放
+          magicType: {
+            type: ['bar', 'line'] // 动态图表的切换
+          }
+        }
+      },
+      legend: {
+        data: ['score', 'age']
       },
       xAxis: {
         type: 'category',
@@ -60,6 +88,10 @@
           position: 'top'
         },
         barWidth: '30%',
+      }, {
+        name: 'age',
+        type: 'bar',
+        data: yData2
       }]
     }
     // 步骤5：将配置项设置给echarts实例对象
