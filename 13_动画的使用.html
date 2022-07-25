@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 步骤2：准备一个呈现图表的盒子 -->
+  <div class="box" style="width: 600px;height: 500px;margin: 100px auto;"></div>
+  <button id="addItem">addItem</button>
+
+  <!-- IMPORT JS -->
+  <!-- 步骤1：引入echarts.js文件 -->
+  <script src="./lib/echarts.min.js"></script>
+  <script src="./lib/jquery.min.js"></script>
+  <script>
+    let myChart = echarts.init(document.querySelector('.box'))
+    myChart.showLoading()
+    $.get('data/test_data.json', function (res) {
+      let axisData = []
+      for (let i = 0; i < res.length; i++) {
+        let height = res[i].height
+        let weight = res[i].weight
+        axisData.push([height, weight])
+      }
+      myChart.hideLoading()
+      let option = {
+        xAxis: {
+          type: 'value',
+          scale: true
+        },
+        yAxis: {
+          type: 'value',
+          scale: true
+        },
+        series: [{
+          data: axisData,
+          type: 'effectScatter',
+          symbolSize: function (arg) {
+            let height = arg[0] / 100
+            let weight = arg[1]
+            let bmi = weight / (height * height)
+            if (bmi > 28) {
+              return 20
+            }
+            return 5
+          },
+          itemStyle: {
+            color: function (arg) {
+              let height = arg.data[0] / 100
+              let weight = arg.data[1]
+              let bmi = weight / (height * height)
+              if (bmi > 28) {
+                return 'red'
+              }
+              return 'green'
+            }
+          }
+        }]
+      }
+      myChart.setOption(option)
+      console.log(axisData);
+      $('#addItem').click(function(){
+        axisData.push([50,120])
+        myChart.setOption({
+          series:[
+            {
+              data:axisData
+            }
+          ]
+        })
+      })
+    })
+  </script>
+</body>
+
+</html>

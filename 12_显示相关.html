@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 步骤2：准备一个呈现图表的盒子 -->
+  <div class="box" style="height: 500px;margin: 100px auto;"></div>
+
+  <!-- IMPORT JS -->
+  <!-- 步骤1：引入echarts.js文件 -->
+  <script src="./lib/echarts.min.js"></script>
+  <script src="./theme/itcast.js"></script>
+  <script>
+    let xData = ['t1', 't2', 't3', 't4', 't5', 't6']
+    let yData = [87, 67, 89, 80, 77, 90]
+
+    let myCharts = echarts.init(document.querySelector('.box'), 'itcast')
+    let option = {
+      xAxis: {
+        type: 'category',
+        value: xData
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [{
+        name: 'rank',
+        type: 'bar',
+        data: yData,
+        itemStyle: {
+          color: {
+            // type: 'linear',
+            // x: 0,
+            // y: 0,
+            // x2: 0,
+            // y2: 1,
+            // colorStops: [{
+            //   offset: 0,
+            //   color: 'red'
+            // }, {
+            //   offset: 1,
+            //   color: 'blue'
+            // }]
+            type: 'radial',
+            x: 0.5,
+            y: 0.5,
+            r: 0.5,
+            colorStops: [{
+              offset: 0,
+              color: 'red'
+            }, {
+              offset: 1,
+              color: 'blue'
+            }]
+          }
+        }
+      }]
+    }
+    myCharts.setOption(option)
+
+    // window.onresize = myCharts.resize
+    myCharts.setOption(option)
+    window.onresize = function () {
+      myCharts.resize()
+    }
+  </script>
+</body>
+
+</html>
